@@ -1,4 +1,4 @@
-package jp.okawa.utils;
+package jp.okawa.js;
  
 import js.Browser;
 import js.html.CanvasElement;
