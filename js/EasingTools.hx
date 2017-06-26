@@ -9,125 +9,371 @@ class EasingTools {
 	========================================================================== */
 	public static function addJQuery():Void {
 
-		var easing : Dynamic = untyped JQuery.easing;
-		easing.easeOutSine    = easeOutSine;
-		easing.easeInSine     = easeInSine;
-		easing.easeInOutSine  = easeInOutSine;
-		easing.easeInQuart    = easeInQuart;
-		easing.easeOutCubic   = easeOutCubic;
-		easing.easeInOutExpo  = easeInOutExpo;
-		easing.easeInBack     = easeInBack;
-		easing.easeOutBack    = easeOutBack;
-		easing.easeOutElastic = easeOutElastic;
-		easing.easeOutBounce  = easeOutBounce;
+		JQuery.extend(untyped JQuery.easing,{
+
+			def   : 'easeOutQuad',
+			swing : swing,
+
+			easeInQuad    : easeInQuad,
+			easeOutQuad   : easeOutQuad,
+			easeInOutQuad : easeInOutQuad,
+
+			easeInCubic    : easeInCubic,
+			easeOutCubic   : easeOutCubic,
+			easeInOutCubic : easeInOutCubic,
+
+			easeInQuart    : easeInQuart,
+			easeOutQuart   : easeOutQuart,
+			easeInOutQuart : easeInOutQuart,
+
+			easeInQuint    : easeInQuint,
+			easeOutQuint   : easeOutQuint,
+			easeInOutQuint : easeInOutQuint,
+
+			easeInSine    : easeInSine,
+			easeOutSine   : easeOutSine,
+			easeInOutSine : easeInOutSine,
+
+			easeInExpo    : easeInExpo,
+			easeOutExpo   : easeOutExpo,
+			easeInOutExpo : easeInOutExpo,
+
+			easeInCirc    : easeInCirc,
+			easeOutCirc   : easeOutCirc,
+			easeInOutCirc : easeInOutCirc,
+
+			easeInElastic    : easeInElastic,
+			easeOutElastic   : easeOutElastic,
+			easeInOutElastic : easeInOutElastic,
+
+			easeInBack    : easeInBack,
+			easeOutBack   : easeOutBack,
+			easeInOutBack : easeInOutBack,
+
+			easeInBounce    : easeInBounce,
+			easeOutBounce   : easeOutBounce,
+			easeInOutBounce : easeInOutBounce
+
+		});
 
 	}
 
 		/* =======================================================================
-			easeOutSine
+			Swing
 		========================================================================== */
-		private static var easeOutSine:Dynamic = function (x,t,b,c,d) {
+		private static function swing(x,t:Float,b,c,d):Float {
 
-			return c * Math.sin(t / d * (Math.PI / 2)) + b;
+			return easeOutQuad(x,t,b,c,d);
 
-		};
+		}
 
 		/* =======================================================================
-			easeInSine
+			In Quad
 		========================================================================== */
-		private static var easeInSine:Dynamic = function (x,t,b,c,d) {
+		private static function easeInQuad(x,t:Float,b,c,d):Float {
+
+			return c*(t/=d)*t + b;
+
+		}
+
+		/* =======================================================================
+			Out Quad
+		========================================================================== */
+		private static function easeOutQuad(x,t:Float,b,c,d):Float {
+
+			return -c *(t/=d)*(t-2) + b;
+
+		}
+
+		/* =======================================================================
+			In Out Quad
+		========================================================================== */
+		private static function easeInOutQuad(x,t:Float,b,c,d):Float {
+
+			if ((t/=d/2) < 1) return c/2*t*t + b;
+			return -c/2 * ((--t)*(t-2) - 1) + b;
+
+		}
+
+		/* =======================================================================
+			In Cubic
+		========================================================================== */
+		private static function easeInCubic(x,t:Float,b,c,d):Float {
+		
+			return c*(t/=d)*t*t + b;
+			
+		}
+
+		/* =======================================================================
+			Out Cubic
+		========================================================================== */
+		private static function easeOutCubic(x,t:Float,b,c,d):Float {
+		
+			return c * ((t/=d - 1) * t * t + 1) + b;
+			
+		}
+
+		/* =======================================================================
+			In Out Cubic
+		========================================================================== */
+		private static function easeInOutCubic(x,t:Float,b,c,d):Float {
+
+			if ((t/=d/2) < 1) return c/2*t*t*t + b;
+			return c/2*((t-=2)*t*t + 2) + b;
+
+		}
+
+		/* =======================================================================
+			In Quart
+		========================================================================== */
+		private static function easeInQuart(x,t:Float,b,c,d):Float {
+			
+			return c * (t /= d) * t * t * t + b;
+		
+		}
+
+		/* =======================================================================
+			Out Quart
+		========================================================================== */
+		private static function easeOutQuart(x,t:Float,b,c,d):Float {
+			
+			return c * (t /= d) * t * t * t + b;
+		
+		}
+
+		/* =======================================================================
+			In Out Quart
+		========================================================================== */
+		private static function easeInOutQuart(x,t:Float,b,c,d):Float {
+
+			if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
+			return -c/2 * ((t-=2)*t*t*t - 2) + b;
+		
+		}
+
+		/* =======================================================================
+			In Quint
+		========================================================================== */
+		private static function easeInQuint(x,t:Float,b,c,d):Float {
+
+			return c*(t/=d)*t*t*t*t + b;
+
+		}
+
+		/* =======================================================================
+			Out Quint
+		========================================================================== */
+		private static function easeOutQuint(x,t:Float,b,c,d):Float {
+
+			return c*((t=t/d-1)*t*t*t*t + 1) + b;
+
+		}
+
+		/* =======================================================================
+			In Out Quint
+		========================================================================== */
+		private static function easeInOutQuint(x,t:Float,b,c,d):Float {
+
+			if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
+			return c/2*((t-=2)*t*t*t*t + 2) + b;
+
+		}
+
+		/* =======================================================================
+			In Sine
+		========================================================================== */
+		private static function easeInSine(x,t,b,c,d):Float {
 
 			return -c * Math.cos(t / d * (Math.PI / 2)) + c + b;
 
-		};
+		}
 
 		/* =======================================================================
-			easeInOutSine
+			Out Sine
 		========================================================================== */
-		private static var easeInOutSine:Dynamic = function (x,t,b,c,d) {
+		private static function easeOutSine(x,t,b,c,d):Float {
+
+			return c * Math.sin(t / d * (Math.PI / 2)) + b;
+
+		}
+
+		/* =======================================================================
+			In Out Sine
+		========================================================================== */
+		private static function easeInOutSine(x,t,b,c,d):Float {
 
 			return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
 
-		};
+		}
 
 		/* =======================================================================
-			easeInQuart
+			In Expo
 		========================================================================== */
-		private static var easeInQuart:Dynamic = function (x,t,b,c,d) {
-			
-			untyped return c * (t /= d) * t * t * t + b;
-		
-		};
+		private static function easeInExpo(x,t,b,c,d):Float {
+
+			return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
+
+		}
 
 		/* =======================================================================
-			easeOutCubic
+			Out Expo
 		========================================================================== */
-		private static var easeOutCubic:Dynamic = function (x,t,b,c,d) {
-		
-			untyped return c * ((t = t / d - 1) * t * t + 1) + b;
-			
-		};
+		private static function easeOutExpo(x,t,b,c,d):Float {
+
+			return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+
+		}
 
 		/* =======================================================================
-			easeInOutExpo
+			In Out Expo
 		========================================================================== */
-		private static var easeInOutExpo:Dynamic = function (x,t,b,c,d) {
+		private static function easeInOutExpo(x,t:Float,b,c,d):Float {
 
 			if (t == 0) return b;
 			if (t == d) return b + c;
-			untyped if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
-			untyped return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+			if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
+			return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
 
-		};
-
-		/* =======================================================================
-			easeInBack
-		========================================================================== */
-		private static var easeInBack:Dynamic = function (x,t,b,c,d,s) {
-
-			untyped if (s == 'undefined') s = 1.70158;
-			untyped return c * (t /= d) * t * ((s + 1) * t - s) + b;
-
-		};
+		}
 
 		/* =======================================================================
-			easeOutBack
+			In Circ
 		========================================================================== */
-		private static var easeOutBack:Dynamic = function (x,t,b,c,d,s) {
+		private static function easeInCirc(x,t:Float,b,c,d):Float {
+
+			return -c * (Math.sqrt(1 - (t/=d)*t) - 1) + b;
+
+		}
+
+		/* =======================================================================
+			Out Circ
+		========================================================================== */
+		private static function easeOutCirc(x,t:Float,b,c,d):Float {
+
+			return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
+
+		}
+
+		/* =======================================================================
+			In Out Circ
+		========================================================================== */
+		private static function easeInOutCirc(x,t:Float,b,c,d):Float {
+
+			if ((t/=d/2) < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
+			return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
+
+		}
+
+		/* =======================================================================
+			In Elastic
+		========================================================================== */
+		private static function easeInElastic(x,t:Float,b,c,d):Float {
+
+			var s=1.70158;
+			var p:Float=0;
+			var a=c;
+			if (t==0) return b;
+			if ((t/=d)==1) return b+c;
+			if (p <= 0) p=d*.3;
+			if (a < Math.abs(c)) { a=c; var s=p/4; }
+			else var s = p/(2*Math.PI) * Math.asin (c/a);
+			return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
 		
-			untyped if (s == 'undefined') s = 1.70158;
-			untyped return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
-		
-		};
+		}
 
 		/* =======================================================================
-			easeOutElastic
+			Out Elastic
 		========================================================================== */
-		private static var easeOutElastic:Dynamic = function (x,t,b,c,d) {
+		private static function easeOutElastic(x,t:Float,b,c,d):Float {
 		
 			var s = 1.70158;
-			var p = 0;
+			var p : Float = 0;
 			var a = c;
 			
 			if (t == 0) return b;
-			untyped if ((t /= d) == 1) return b + c;
-			untyped if (!p) p = d * .3;
+			if ((t /= d) == 1) return b + c;
+			if (p <= 0) p = d * .3;
 			if (a < Math.abs(c)) { a = c; var s = p / 4; }
 			else var s = p / (2 * Math.PI) * Math.asin (c / a);
-			untyped return a * Math.pow(2,-10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p ) + c + b;
+			return a * Math.pow(2,-10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p ) + c + b;
 		
-		};
+		}
 
 		/* =======================================================================
-			easeOutBounce
+			Out Elastic
 		========================================================================== */
-		private static var easeOutBounce:Dynamic = function (x,t,b,c,d) {
+		private static function easeInOutElastic(x,t:Float,b,c,d):Float {
+
+			var s=1.70158;
+			var p:Float=0;
+			var a=c;
+			if (t==0) return b;
+			if ((t/=d/2)==2) return b+c;
+			if (p <= 0) p=d*(.3*1.5);
+			if (a < Math.abs(c)) { a=c; var s=p/4; }
+			else var s = p/(2*Math.PI) * Math.asin (c/a);
+			if (t < 1) return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+			return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
 		
-			untyped if ((t /= d) < (1 / 2.75)) return c * (7.5625 * t * t) + b;
+		}
+
+		/* =======================================================================
+			In Back
+		========================================================================== */
+		private static function easeInBack(x,t:Float,b,c,d,s=1.70158):Float {
+
+			return c * (t /= d) * t * ((s + 1) * t - s) + b;
+
+		}
+
+		/* =======================================================================
+			Out Back
+		========================================================================== */
+		private static function easeOutBack(x,t:Float,b,c,d,s=1.70158):Float {
+		
+			return c * ((t /= d - 1) * t * ((s + 1) * t + s) + 1) + b;
+
+		}
+
+		/* =======================================================================
+			In Out Back
+		========================================================================== */
+		private static function easeInOutBack(x,t:Float,b,c,d,s=1.70158):Float {
+
+			if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+			return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+
+		}
+
+		/* =======================================================================
+			In Bounce
+		========================================================================== */
+		private static function easeInBounce(x,t:Float,b,c,d):Float {
+		
+			return c - easeOutBounce(x, d-t, 0, c, d) + b;
+
+		}
+
+		/* =======================================================================
+			Out Bounce
+		========================================================================== */
+		private static function easeOutBounce(x,t:Float,b,c,d):Float {
+		
+			if ((t /= d) < (1 / 2.75)) return c * (7.5625 * t * t) + b;
 			else if (t < (2 / 2.75)) return c * (7.5625 * (t -= (1.5 / 2.75)) * t + .75) + b;
 			else if (t < (2.5 / 2.75)) return c * (7.5625 * (t -= (2.25 / 2.75)) * t + .9375) + b;
 			else return c*(7.5625 * (t -= (2.625 / 2.75)) * t + .984375) + b;
-		
-		};
+
+		}
+
+		/* =======================================================================
+			In Out Bounce
+		========================================================================== */
+		private static function easeInOutBounce(x,t:Float,b,c,d):Float {
+
+			if (t < d/2) return easeInBounce(x, t*2, 0, c, d) * .5 + b;
+			return easeOutBounce(x, t*2-d, 0, c, d) * .5 + c*.5 + b;
+
+		}
 
 }
