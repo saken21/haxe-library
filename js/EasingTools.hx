@@ -322,7 +322,7 @@ class EasingTools {
 		========================================================================== */
 		private static function easeInBack(x,t:Float,b,c,d,s=1.70158):Float {
 
-			return c * (t /= d) * t * ((s + 1) * t - s) + b;
+			return c*(t/=d)*t*((s+1)*t - s) + b;
 
 		}
 
@@ -330,8 +330,8 @@ class EasingTools {
 			Out Back
 		========================================================================== */
 		private static function easeOutBack(x,t:Float,b,c,d,s=1.70158):Float {
-		
-			return c * ((t /= d - 1) * t * ((s + 1) * t + s) + 1) + b;
+
+			return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
 
 		}
 
